@@ -6,7 +6,7 @@ if (isset($_SESSION['admin_logged_in'])) {
 }
 
 if ($_POST) {
-    if ($_POST['username'] === 'gleesireAdmin' && $_POST['password'] === 'GA@123#') {
+    if ($_POST['username'] === 'gleesireAdmin' && $_POST['password'] === 'ivMlw2IR5R98USj8UkdUv') {
         $_SESSION['admin_logged_in'] = true;
         header('Location: dashboard.php');
         exit;

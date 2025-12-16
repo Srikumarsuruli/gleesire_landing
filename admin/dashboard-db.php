@@ -37,6 +37,9 @@ if (isset($_GET['logout'])) {
         th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
         th { background: #f8f9fa; }
         .logout { background: #dc3545; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; }
+        .download-btn { background: #28a745; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; margin-left: 10px; }
+        .download-btn:hover { background: #218838; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
     </style>
 </head>
 <body>
@@ -61,7 +64,10 @@ if (isset($_GET['logout'])) {
     </div>
 
     <div class="card">
-        <h3>Visitors by City</h3>
+        <div class="section-header">
+            <h3>Visitors by City</h3>
+            <a href="export-csv-db.php?type=visitors" class="download-btn">Download CSV</a>
+        </div>
         <table>
             <tr><th>City</th><th>Visits</th></tr>
             <?php foreach ($cityStats as $stat): ?>
@@ -71,7 +77,10 @@ if (isset($_GET['logout'])) {
     </div>
 
     <div class="card">
-        <h3>Recent Leads</h3>
+        <div class="section-header">
+            <h3>Recent Leads</h3>
+            <a href="export-csv-db.php?type=leads" class="download-btn">Download CSV</a>
+        </div>
         <table>
             <tr><th>Name</th><th>Phone</th><th>Attraction</th><th>Date</th></tr>
             <?php foreach ($recentLeads as $lead): ?>

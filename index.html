@@ -791,9 +791,20 @@
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
-        }).then(() => {
-            alert('Thank you! We will contact you soon.');
-            this.reset();
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                alert('Thank you! We will contact you soon.');
+                this.reset();
+            } else {
+                console.error('Error:', result);
+                alert('Error: ' + (result.error || 'Unknown error'));
+            }
+        })
+        .catch(error => {
+            console.error('Network error:', error);
+            alert('Network error. Please try again.');
         });
     });
     </script>

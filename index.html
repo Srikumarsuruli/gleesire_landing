@@ -70,6 +70,14 @@
         [dir="rtl"] .cs_top_header_right {
             order: 1;
         }
+        
+        @media (max-width: 768px) {
+            [dir="rtl"] .cs_main_header_left {
+                flex: none;
+                width: auto;
+                order: unset;
+            }
+        }
         [dir="rtl"] .cs_hero_in {
             flex-direction: row-reverse;
         }

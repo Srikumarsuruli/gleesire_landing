@@ -12,7 +12,6 @@ $servername = "localhost"; // Change to your AWS RDS endpoint if using RDS
 $username = "gleesire_user";
 $password = "Sri@123#$#"; // Add your database password
 $dbname = "dubai_analytics";
-
 try {
     $pdo = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -31,15 +30,17 @@ if (!$input) {
 
 try {
     if ($input['type'] === 'lead') {
-        $stmt = $pdo->prepare("INSERT INTO leads (name, phone, attraction, adults, children, timestamp) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt = $pdo->prepare("INSERT INTO leads (name, phone, date, attraction, adults, children, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?)");
         $result = $stmt->execute([
             $input['name'],
             $input['phone'],
+            $input['date'] ?? '',
             $input['attraction'],
             (int)$input['adults'],
             (int)($input['children'] ?: 0),
             time()
         ]);
+    
         
         if ($result) {
             echo json_encode(['success' => true, 'id' => $pdo->lastInsertId()]);

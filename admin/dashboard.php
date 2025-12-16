@@ -66,25 +66,12 @@ if (isset($_GET['logout'])) {
 
     <div class="card">
         <div class="section-header">
-            <h3>Visitors by City</h3>
-            <a href="export-csv.php?type=visitors" class="download-btn">Download CSV</a>
-        </div>
-        <table>
-            <tr><th>City</th><th>Visits</th></tr>
-            <?php foreach ($cityStats as $city => $count): ?>
-                <tr><td><?= htmlspecialchars($city) ?></td><td><?= $count ?></td></tr>
-            <?php endforeach; ?>
-        </table>
-    </div>
-
-    <div class="card">
-        <div class="section-header">
-            <h3>Recent Leads</h3>
+            <h3>All Enquiries</h3>
             <a href="export-csv.php?type=leads" class="download-btn">Download CSV</a>
         </div>
         <table>
             <tr><th>Name</th><th>Phone</th><th>Attraction</th><th>Date</th></tr>
-            <?php foreach (array_slice(array_reverse($leads), 0, 10) as $lead): ?>
+            <?php foreach (array_reverse($leads) as $lead): ?>
                 <tr>
                     <td><?= htmlspecialchars($lead['name'] ?? '') ?></td>
                     <td><?= htmlspecialchars($lead['phone'] ?? '') ?></td>

@@ -5,9 +5,22 @@ if (!isset($_SESSION['admin_logged_in'])) {
     exit;
 }
 
-// Read data files
-$visitors = file_exists('../data/visitors.json') ? json_decode(file_get_contents('../data/visitors.json'), true) : [];
-$leads = file_exists('../data/leads.json') ? json_decode(file_get_contents('../data/leads.json'), true) : [];
+// Database connection
+$servername = "localhost";
+$username = "gleesire_user";
+$password = "Sri@123#$#";
+$dbname = "dubai_analytics";
+
+try {
+    $pdo = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch(PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
+
+// Read data from database
+$visitors = $pdo->query("SELECT * FROM visitors ORDER BY timestamp DESC")->fetchAll(PDO::FETCH_ASSOC);
+$leads = $pdo->query("SELECT * FROM leads ORDER BY timestamp DESC")->fetchAll(PDO::FETCH_ASSOC);
 
 // Count visitors by city
 $cityStats = [];
@@ -70,13 +83,16 @@ if (isset($_GET['logout'])) {
             <a href="export-csv.php?type=leads" class="download-btn">Download CSV</a>
         </div>
         <table>
-            <tr><th>Name</th><th>Phone</th><th>Attraction</th><th>Date</th></tr>
-            <?php foreach (array_reverse($leads) as $lead): ?>
+            <tr><th>S.No</th><th>Name</th><th>Phone</th><th>Attraction</th><th>Adults</th><th>Children</th><th>Date & Time</th></tr>
+            <?php $sno = 1; foreach ($leads as $lead): ?>
                 <tr>
+                    <td><?= $sno++ ?></td>
                     <td><?= htmlspecialchars($lead['name'] ?? '') ?></td>
                     <td><?= htmlspecialchars($lead['phone'] ?? '') ?></td>
                     <td><?= htmlspecialchars($lead['attraction'] ?? '') ?></td>
-                    <td><?= date('Y-m-d H:i', $lead['timestamp'] ?? 0) ?></td>
+                    <td><?= $lead['adults'] ?? 0 ?></td>
+                    <td><?= $lead['children'] ?? 0 ?></td>
+                    <td><?= date('Y-m-d H:i:s', $lead['timestamp'] ?? 0) ?></td>
                 </tr>
             <?php endforeach; ?>
         </table>

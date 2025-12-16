@@ -46,6 +46,18 @@
         [dir="rtl"] .cs_nav_list {
             flex-direction: row-reverse;
         }
+        [dir="rtl"] .cs_main_header_in {
+            flex-direction: row-reverse;
+        }
+        [dir="rtl"] .cs_main_header_left {
+            order: 3;
+        }
+        [dir="rtl"] .cs_main_header_center {
+            order: 2;
+        }
+        [dir="rtl"] .cs_main_header_right {
+            order: 1;
+        }
         [dir="rtl"] .cs_hero_in {
             flex-direction: row-reverse;
         }
@@ -120,7 +132,7 @@
                 <div class="cs_main_header_center">
                     <div class="cs_nav cs_medium cs_primary_font">
                         <ul class="cs_nav_list">
-                            <li><a href="#home" onclick="scrollToTop()">↑</a></li>
+                            <li><a href="#home" data-translate="home">Home</a></li>
                             <li><a href="#attractions" data-translate="dubai_attractions">Dubai Attractions</a></li>
                             <li><a href="#abudhabi" data-translate="abu_dhabi">Abu Dhabi</a></li>
                             <li><a href="#adventure" data-translate="adventure">Adventure</a></li>
@@ -692,7 +704,7 @@
                     <div class="cs_footer_widget">
                         <h3 class="cs_footer_widget_title cs_fs_24 cs_semibold cs_white_color">Quick Links</h3>
                         <ul class="cs_menu_widget">
-                            <li><a href="#home" onclick="scrollToTop()">↑ Top</a></li>
+                            <li><a href="#home">Home</a></li>
                             <li><a href="#attractions">Dubai Attractions</a></li>
                             <li><a href="#abudhabi">Abu Dhabi</a></li>
                             <li><a href="#adventure">Adventure</a></li>
@@ -803,11 +815,6 @@
                 element.textContent = translations[lang][key];
             }
         });
-    }
-
-    // Scroll to top function
-    function scrollToTop() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     // Track form submission

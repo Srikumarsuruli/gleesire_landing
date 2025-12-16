@@ -703,12 +703,12 @@
     <script src="/landing/assets/js/main.js"></script>
     <script>
     // Track page visit
-    fetch('/landing/track.php', {
+    fetch('track.php', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
             type: 'visit',
-            city: 'Dubai', // You can integrate with IP geolocation API
+            city: 'Dubai',
             page: window.location.href
         })
     });
@@ -787,7 +787,7 @@
             children: formData.get('children')
         };
         
-        fetch('/landing/track.php', {
+        fetch('track.php', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)

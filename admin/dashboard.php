@@ -84,7 +84,8 @@ if (isset($_GET['logout'])) {
         
         <div class="filters">
             <input type="month" id="monthFilter" placeholder="Filter by Month">
-            <input type="date" id="dateFilter" placeholder="Filter by Date">
+            <input type="date" id="fromDate" placeholder="From Date">
+            <input type="date" id="toDate" placeholder="To Date">
             <input type="text" id="searchBox" class="search-box" placeholder="Search by name, phone, or attraction...">
             <button onclick="clearFilters()">Clear</button>
         </div>
@@ -108,7 +109,8 @@ if (isset($_GET['logout'])) {
     <script>
     function filterTable() {
         const monthFilter = document.getElementById('monthFilter').value;
-        const dateFilter = document.getElementById('dateFilter').value;
+        const fromDate = document.getElementById('fromDate').value;
+        const toDate = document.getElementById('toDate').value;
         const searchBox = document.getElementById('searchBox').value.toLowerCase();
         const table = document.getElementById('leadsTable');
         const rows = table.getElementsByTagName('tr');
@@ -117,6 +119,7 @@ if (isset($_GET['logout'])) {
             const row = rows[i];
             const cells = row.getElementsByTagName('td');
             const dateTime = cells[6].textContent;
+            const rowDate = dateTime.split(' ')[0];
             const name = cells[1].textContent.toLowerCase();
             const phone = cells[2].textContent.toLowerCase();
             const attraction = cells[3].textContent.toLowerCase();
@@ -127,7 +130,11 @@ if (isset($_GET['logout'])) {
                 showRow = false;
             }
             
-            if (dateFilter && !dateTime.startsWith(dateFilter)) {
+            if (fromDate && rowDate < fromDate) {
+                showRow = false;
+            }
+            
+            if (toDate && rowDate > toDate) {
                 showRow = false;
             }
             
@@ -141,13 +148,15 @@ if (isset($_GET['logout'])) {
     
     function clearFilters() {
         document.getElementById('monthFilter').value = '';
-        document.getElementById('dateFilter').value = '';
+        document.getElementById('fromDate').value = '';
+        document.getElementById('toDate').value = '';
         document.getElementById('searchBox').value = '';
         filterTable();
     }
     
     document.getElementById('monthFilter').addEventListener('change', filterTable);
-    document.getElementById('dateFilter').addEventListener('change', filterTable);
+    document.getElementById('fromDate').addEventListener('change', filterTable);
+    document.getElementById('toDate').addEventListener('change', filterTable);
     document.getElementById('searchBox').addEventListener('input', filterTable);
     </script>
 </body>

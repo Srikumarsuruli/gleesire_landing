@@ -5,6 +5,19 @@ if (!isset($_SESSION['admin_logged_in'])) {
     exit;
 }
 
+// Database connection
+$servername = "localhost";
+$username = "gleesire_user";
+$password = "Sri@123#$#";
+$dbname = "dubai_analytics";
+
+try {
+    $pdo = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch(PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
+
 $type = $_GET['type'] ?? 'leads';
 
 // Set CSV headers
@@ -14,26 +27,27 @@ header('Content-Disposition: attachment; filename="' . $type . '_' . date('Y-m-d
 $output = fopen('php://output', 'w');
 
 if ($type === 'leads') {
-    // Export leads data
-    $leads = file_exists('../data/leads.json') ? json_decode(file_get_contents('../data/leads.json'), true) : [];
+    // Export leads data from database
+    $leads = $pdo->query("SELECT * FROM leads ORDER BY timestamp DESC")->fetchAll(PDO::FETCH_ASSOC);
     
     // CSV headers
-    fputcsv($output, ['Name', 'Phone', 'Attraction', 'Adults', 'Children', 'Date', 'Timestamp']);
+    fputcsv($output, ['S.No', 'Name', 'Phone', 'Attraction', 'Adults', 'Children', 'Date & Time']);
     
+    $sno = 1;
     foreach ($leads as $lead) {
         fputcsv($output, [
+            $sno++,
             $lead['name'] ?? '',
             $lead['phone'] ?? '',
             $lead['attraction'] ?? '',
-            $lead['adults'] ?? '',
-            $lead['children'] ?? '',
-            date('Y-m-d H:i:s', $lead['timestamp'] ?? 0),
-            $lead['timestamp'] ?? 0
+            $lead['adults'] ?? 0,
+            $lead['children'] ?? 0,
+            date('Y-m-d H:i:s', $lead['timestamp'] ?? 0)
         ]);
     }
 } else if ($type === 'visitors') {
-    // Export visitors data
-    $visitors = file_exists('../data/visitors.json') ? json_decode(file_get_contents('../data/visitors.json'), true) : [];
+    // Export visitors data from database
+    $visitors = $pdo->query("SELECT * FROM visitors ORDER BY timestamp DESC")->fetchAll(PDO::FETCH_ASSOC);
     
     // CSV headers
     fputcsv($output, ['IP Address', 'City', 'Page', 'Date', 'Timestamp']);

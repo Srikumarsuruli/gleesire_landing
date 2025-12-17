@@ -808,7 +808,7 @@
     <script src="/landing/assets/js/main.js"></script>
     <script>
     // Track page visit
-    fetch('https://gleesire.ae/landing/gleesire_landing/track.php', {
+    fetch('track.php', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -892,7 +892,7 @@
             children: formData.get('children')
         };
         
-        fetch('https://gleesire.ae/landing/gleesire_landing/track.php', {
+        fetch('track.php', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
@@ -918,7 +918,7 @@
         e.preventDefault();
         const email = document.getElementById('newsletterEmail').value;
         
-        fetch('https://gleesire.ae/landing/gleesire_landing/newsletter.php', {
+        fetch('newsletter.php', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({email: email})

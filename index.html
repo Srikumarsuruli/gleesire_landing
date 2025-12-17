@@ -43,16 +43,11 @@
         .cs_language_selector {
             display: none;
         }
-        @media (max-width: 768px) {
+        @media (max-width: 991px) {
             .cs_site_header {
-                position: fixed !important;
+                position: sticky !important;
                 top: 0;
-                left: 0;
-                right: 0;
                 z-index: 9999;
-            }
-            body {
-                padding-top: 120px;
             }
         }
         [dir="rtl"] {
@@ -596,9 +591,26 @@
                             <div class="col-lg-6">
                                 <select name="attraction" class="cs_form_field" required>
                                     <option value="">Select Attraction</option>
-                                    <option value="burj-khalifa">Burj Khalifa</option>
-                                    <option value="dubai-aquarium">Dubai Aquarium</option>
-                                    <option value="desert-safari">Desert Safari</option>
+                                    <option value="burj-khalifa">Burj Khalifa - At The Top</option>
+                                    <option value="dubai-aquarium">Dubai Aquarium & Underwater Zoo</option>
+                                    <option value="dubai-frame">Dubai Frame</option>
+                                    <option value="the-view-palm">The View at The Palm</option>
+                                    <option value="aya-universe">AYA Universe</option>
+                                    <option value="dubai-miracle-garden">Dubai Miracle Garden</option>
+                                    <option value="global-village">Global Village</option>
+                                    <option value="dinner-sky">Dinner in the Sky Dubai</option>
+                                    <option value="la-perle">La Perle by Dragone</option>
+                                    <option value="teamlab-phenomena">TeamLab Phenomena</option>
+                                    <option value="louvre-museum">Louvre Museum</option>
+                                    <option value="ferrari-world">Ferrari World</option>
+                                    <option value="yas-waterworld">Yas Waterworld</option>
+                                    <option value="desert-safari-sharing">Desert Safari with BBQ (Sharing)</option>
+                                    <option value="desert-safari-private">Private Desert Safari</option>
+                                    <option value="hot-air-balloon">Hot Air Balloon</option>
+                                    <option value="jet-ski">Jet Ski Rental</option>
+                                    <option value="yacht-charter">Luxury Yacht Charter</option>
+                                    <option value="aquaventure">Aquaventure Waterpark</option>
+                                    <option value="wild-wadi">Wild Wadi Waterpark</option>
                                     <option value="multiple">Multiple Attractions</option>
                                 </select>
                             </div>

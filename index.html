@@ -45,9 +45,18 @@
         }
         @media (max-width: 991px) {
             .cs_site_header {
-                position: sticky !important;
+                position: fixed !important;
                 top: 0;
+                left: 0;
+                right: 0;
                 z-index: 9999;
+            }
+            body {
+                padding-top: 140px;
+            }
+            .cs_contact_form {
+                z-index: 10000;
+                position: relative;
             }
         }
         [dir="rtl"] {

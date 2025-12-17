@@ -45,6 +45,21 @@ if ($type === 'leads') {
             date('Y-m-d H:i:s', $lead['timestamp'] ?? 0)
         ]);
     }
+} else if ($type === 'newsletter') {
+    // Export newsletter subscribers data from database
+    $newsletters = $pdo->query("SELECT * FROM newsletter_subscribers ORDER BY timestamp DESC")->fetchAll(PDO::FETCH_ASSOC);
+    
+    // CSV headers
+    fputcsv($output, ['S.No', 'Email', 'Subscribed At']);
+    
+    $sno = 1;
+    foreach ($newsletters as $newsletter) {
+        fputcsv($output, [
+            $sno++,
+            $newsletter['email'] ?? '',
+            date('Y-m-d H:i:s', $newsletter['timestamp'] ?? 0)
+        ]);
+    }
 } else if ($type === 'visitors') {
     // Export visitors data from database
     $visitors = $pdo->query("SELECT * FROM visitors ORDER BY timestamp DESC")->fetchAll(PDO::FETCH_ASSOC);

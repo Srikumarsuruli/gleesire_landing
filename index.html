@@ -40,6 +40,21 @@
             background: #333;
             color: white;
         }
+        .cs_language_selector {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .cs_site_header {
+                position: fixed !important;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 9999;
+            }
+            body {
+                padding-top: 120px;
+            }
+        }
         [dir="rtl"] {
             text-align: right;
         }

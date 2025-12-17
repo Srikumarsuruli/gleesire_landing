@@ -146,12 +146,24 @@ function gtag_report_conversion(url) {
         
         /* Show card details by default on mobile/tablet only */
         @media (max-width: 991px) {
+            .cs_card.cs_style_1:hover .cs_card_content, 
+            .cs_card.cs_style_1:hover .cs_card_overlay {
+                opacity: 0;
+            }
+            
             .cs_card.cs_style_1 .cs_card_overlay {
                 opacity: 1;
+                position: static !important;
+                background: transparent !important;
             }
             
             .cs_card.cs_style_1 .cs_card_content {
                 opacity: 1;
+                position: static !important;
+                background: #ff6b35 !important;
+                margin-top: 10px;
+                padding: 15px;
+                border-radius: 5px;
             }
             
             .cs_site_branding img,
@@ -230,7 +242,7 @@ function gtag_report_conversion(url) {
     <section id="home" class="cs_hero cs_style_3 cs_bg_filed" data-src="/landing/assets/images/hero_bg_3.jpeg">
         <div class="cs_hero_in">
             <div class="cs_hero_img">
-                <img src="/landing/assets/images/about_img2.png" alt="Dubai Attractions">
+                <img src="/landing/assets/images/about_img3.png" alt="Dubai Attractions">
             </div>
             <div class="cs_hero_text">
                 <h1 class="cs_hero_title cs_fs_85 cs_semibold text-uppercase wow fadeInLeft" data-wow-duration="0.8s" data-wow-delay="0.2s" data-translate="hero_title">Explore Dubai & Abu Dhabi's Top Attractions</h1>

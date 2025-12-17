@@ -195,7 +195,7 @@ function gtag_report_conversion(url) {
             <div class="cs_main_header_in">
                 <div class="cs_main_header_left">
                     <a class="cs_site_branding" href="#home">
-                        <img src="/landing/logo-gleesire.svg" alt="Logo" style="max-width: 45%;">
+                        <img src="/landing/logo-gleesire.svg" alt="Logo">
                     </a>
                 </div>
                 <div class="cs_main_header_center">
@@ -665,6 +665,9 @@ function gtag_report_conversion(url) {
                             <div class="col-lg-6">
                                 <input type="number" name="children" placeholder="Children" class="cs_form_field" min="0">
                             </div>
+                            <div class="col-12">
+                                <div class="g-recaptcha" data-sitekey="6LfYourSiteKeyHere"></div>
+                            </div>
                             <div class="col-12 text-center">
                                 <button type="submit" class="cs_btn cs_style_1 cs_fs_18 cs_medium">
                                     🎟 Get Best Offer Now
@@ -760,7 +763,7 @@ function gtag_report_conversion(url) {
                 <div class="cs_footer_main_col">
                     <div class="cs_footer_widget">
                         <div class="cs_text_widget">
-                            <img src="/landing/logo-gleesire.svg" alt="Logo" style="max-width: 45%;">
+                            <img src="/landing/logo-gleesire.svg" alt="Logo">
                         </div>
                         <ul class="cs_contact_widget mb-0">
                             <li>
@@ -837,6 +840,7 @@ function gtag_report_conversion(url) {
     <script src="/landing/assets/js/select2.min.js"></script>
     <script src="/landing/assets/js/light_gallery.min.js"></script>
     <script src="/landing/assets/js/main.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
     // Track page visit
     fetch('/landing/track.php', {
@@ -912,6 +916,14 @@ function gtag_report_conversion(url) {
     // Track form submission
     document.getElementById('leadForm').addEventListener('submit', function(e) {
         e.preventDefault();
+        
+        // Check reCAPTCHA
+        const recaptchaResponse = grecaptcha.getResponse();
+        if (!recaptchaResponse) {
+            alert('Please complete the reCAPTCHA verification.');
+            return;
+        }
+        
         const formData = new FormData(this);
         const data = {
             type: 'lead',
@@ -920,7 +932,8 @@ function gtag_report_conversion(url) {
             date: formData.get('date'),
             attraction: formData.get('attraction'),
             adults: formData.get('adults'),
-            children: formData.get('children')
+            children: formData.get('children'),
+            recaptcha: recaptchaResponse
         };
         
         fetch('/landing/track.php', {
